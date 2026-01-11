@@ -1,0 +1,28 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+
+# Misc
+.DS_Store
+AUDIO_LINKS.md
+
+# Audio and Video Files
+/public/audio/*.mp3
+/public/audio/*.wav
+/public/audio/*.m4a
+/public/audio/*.ogg
+/public/video/*.mp4
+/public/video/*.webm
+/public/video/*.mov
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.mp3

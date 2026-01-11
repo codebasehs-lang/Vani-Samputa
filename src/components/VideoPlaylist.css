@@ -1,0 +1,270 @@
+.video-playlist-container {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.playlist-header {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.playlist-icon {
+  font-size: 4rem;
+  flex-shrink: 0;
+  filter: grayscale(100%) sepia(100%) saturate(400%) hue-rotate(10deg) brightness(0.8);
+}
+
+.playlist-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.playlist-header p {
+  color: #666;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.video-count-badge {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.35rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+/* YouTube-like Layout */
+.youtube-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Main Video Section */
+.main-video-section {
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.video-player-wrapper {
+  width: 100%;
+  background: #000;
+}
+
+.main-video-iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+}
+
+.main-video-info {
+  padding: 1.5rem;
+}
+
+.main-video-info h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.75rem;
+}
+
+.video-meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.video-description {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Playlist Sidebar */
+.playlist-sidebar {
+  background: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 1rem;
+}
+
+.playlist-sidebar-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #d4a574 0%, #6b4423 100%);
+  color: white;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.playlist-sidebar-header h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.playlist-sidebar-header span {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.playlist-items {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.playlist-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.playlist-item:hover {
+  background-color: #f8f9fa;
+}
+
+.playlist-item.active {
+  background: linear-gradient(90deg, rgba(212, 165, 116, 0.15) 0%, rgba(107, 68, 35, 0.15) 100%);
+  border-left: 4px solid var(--accent-dark);
+}
+
+.playlist-item-thumbnail {
+  width: 120px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-item.active .playlist-item-thumbnail {
+  border: 2px solid var(--accent-dark);
+}
+
+.playlist-item-content {
+  flex: 1;
+}
+
+.playlist-item-content h4 {
+  font-size: 0.9rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.playlist-item-duration {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.error-message {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: var(--radius-md);
+}
+
+.error-message h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--accent-dark);
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #6b4423;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .youtube-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .playlist-sidebar {
+    max-height: 400px;
+    position: static;
+  }
+
+  .playlist-item-thumbnail {
+    width: 100px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .playlist-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .playlist-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .main-video-info h2 {
+    font-size: 1.2rem;
+  }
+  
+  .playlist-sidebar-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .main-video-iframe {
+    height: 300px;
+  }
+
+  .playlist-item {
+    padding: 0.5rem;
+  }
+
+  .playlist-item-thumbnail {
+    width: 80px;
+    height: 45px;
+  }
+
+  .playlist-item-content h4 {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .playlist-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .main-video-iframe {
+    height: 220px;
+  }
+
+  .video-count-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+  }
+}
