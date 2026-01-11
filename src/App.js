@@ -73,13 +73,6 @@ function App() {
                 Home
               </NavLink>
               <NavLink
-                to="/about"
-                onClick={closeMobileMenu}
-                className={({ isActive }) => (isActive ? 'active' : undefined)}
-              >
-                About
-              </NavLink>
-              <NavLink
                 to="/audio"
                 onClick={closeMobileMenu}
                 className={({ isActive }) => (isActive ? 'active' : undefined)}
@@ -103,6 +96,13 @@ function App() {
                   Live
                   {hasLiveUrl && <span className="live-indicator-dot" aria-hidden="true" />}
                 </span>
+              </NavLink>
+              <NavLink
+                to="/about"
+                onClick={closeMobileMenu}
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                About
               </NavLink>
             </nav>
 
