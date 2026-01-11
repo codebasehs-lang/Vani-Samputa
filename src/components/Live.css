@@ -1,0 +1,92 @@
+.live-container {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.live-player-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid rgba(139, 111, 71, 0.18);
+  overflow: hidden;
+}
+
+.live-player-frame {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.live-player-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.live-empty-state {
+  padding: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #f5f0e8 0%, #ffffff 50%, #f5f0e8 100%);
+}
+
+.live-empty-state h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+  color: #4a2f1a;
+}
+
+.live-empty-state p {
+  margin: 0;
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.live-description {
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: white;
+  border-top: 1px solid rgba(139, 111, 71, 0.12);
+}
+
+.live-description h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: #4a2f1a;
+}
+
+.live-description p {
+  margin: 0;
+  color: #666;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.inline-code {
+  font-family: inherit;
+  background: rgba(212, 165, 116, 0.18);
+  padding: 0.15rem 0.4rem;
+  border-radius: 6px;
+  color: #6b4423;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .live-empty-state {
+    padding: 1.5rem;
+  }
+
+  .live-description {
+    padding: 1rem 1.1rem 1.25rem;
+  }
+}

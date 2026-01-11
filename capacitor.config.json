@@ -1,0 +1,10 @@
+{
+  "appId": "com.vanisamputa.app",
+  "appName": "Vani Samputa",
+  "webDir": "build",
+  "bundledWebRuntime": false,
+  "server": {
+    "url": "https://vani-samputa.vercel.app/",
+    "cleartext": false
+  }
+}

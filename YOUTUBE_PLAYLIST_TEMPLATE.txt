@@ -1,0 +1,38 @@
+// TEMPLATE: Add YouTube Playlists from @HaladharaSwami
+// Copy this template and fill in the details from the YouTube channel
+
+// Example format:
+{
+  id: 4,
+  playlistName: "COPY PLAYLIST NAME HERE",
+  description: "Add a brief description",
+  thumbnail: "https://img.youtube.com/vi/FIRST_VIDEO_ID/maxresdefault.jpg",
+  videos: [
+    {
+      id: 401,
+      title: "COPY VIDEO TITLE",
+      youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID",
+      duration: "XX:XX",
+      description: "Video description"
+    },
+    {
+      id: 402,
+      title: "COPY VIDEO TITLE",
+      youtubeUrl: "https://www.youtube.com/watch?v=VIDEO_ID",
+      duration: "XX:XX",
+      description: "Video description"
+    }
+    // Add more videos...
+  ]
+}
+
+// HOW TO GET VIDEO ID from YouTube URL:
+// https://www.youtube.com/watch?v=dQw4w9WgXcQ
+//                                 ^^^^^^^^^^^
+//                                 This is the VIDEO_ID
+
+// INSTRUCTIONS:
+// 1. Open the YouTube playlist
+// 2. Copy each video's title and URL
+// 3. Fill in the template above
+// 4. Paste into src/data/libraryData.js in the videoData array
