@@ -107,14 +107,22 @@ function Home() {
     return entries;
   }, [normalizeText]);
 
+  const [searchFilter, setSearchFilter] = React.useState('all');
+
   const searchResults = React.useMemo(() => {
     const q = normalizeText(searchQuery);
     if (!q) return [];
 
-    return searchEntries
-      .filter((entry) => entry.haystack.includes(q))
-      .slice(0, 10);
-  }, [normalizeText, searchEntries, searchQuery]);
+    let filtered = searchEntries.filter((entry) => entry.haystack.includes(q));
+
+    if (searchFilter === 'audio') {
+      filtered = filtered.filter(entry => entry.kind.includes('Audio'));
+    } else if (searchFilter === 'video') {
+      filtered = filtered.filter(entry => entry.kind.includes('Video'));
+    }
+
+    return filtered.slice(0, 10);
+  }, [normalizeText, searchEntries, searchQuery, searchFilter]);
 
   React.useEffect(() => {
     if (!searchOpen) return;
@@ -238,20 +246,32 @@ function Home() {
 
             <div className="home-global-search" ref={searchWrapperRef}>
               <div className="home-global-search-label">Global Search</div>
-              <div className="home-global-search-inputRow">
-                <input
-                  className="home-global-search-input"
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => {
-                    setSearchQuery(e.target.value);
-                    setSearchOpen(true);
-                  }}
-                  onFocus={() => setSearchOpen(true)}
-                  placeholder="Search audio lectures, video lectures, playlists…"
-                  aria-label="Global search"
-                  autoComplete="off"
-                />
+              <div className="home-search-bar-container">
+                <select
+                  className="home-search-filter"
+                  value={searchFilter}
+                  onChange={(e) => setSearchFilter(e.target.value)}
+                  aria-label="Filter search results"
+                >
+                  <option value="all">All</option>
+                  <option value="audio">Audio</option>
+                  <option value="video">Video</option>
+                </select>
+                <div className="home-global-search-inputRow">
+                  <input
+                    className="home-global-search-input"
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => {
+                      setSearchQuery(e.target.value);
+                      setSearchOpen(true);
+                    }}
+                    onFocus={() => setSearchOpen(true)}
+                    placeholder="Search lectures, playlists…"
+                    aria-label="Global search"
+                    autoComplete="off"
+                  />
+                </div>
               </div>
 
               {searchOpen && normalizeText(searchQuery) && (
@@ -322,7 +342,10 @@ function Home() {
                     <span className="daily-quote-title">{selectedQuote.title}</span>
                     <span className="daily-quote-language">{selectedQuote.language}</span>
                   </div>
-                  <div className="daily-quote-text">“{selectedQuote.text}”</div>
+                  <div className={`daily-quote-text ${selectedQuote.language === 'हिंदी' ? 'font-hindi' :
+                    selectedQuote.language === 'ଓଡ଼ିଆ' ? 'font-odia' :
+                      selectedQuote.language === 'বাংলা' ? 'font-bengali' : ''
+                    }`}>“{selectedQuote.text}”</div>
                 </div>
               </div>
             </div>
@@ -342,7 +365,7 @@ function Home() {
             </div>
             <h2>Audio Lectures</h2>
             <p>
-              Browse our extensive collection of audio lectures organized by category. 
+              Browse our extensive collection of audio lectures organized by category.
               Many lectures include detailed transcriptions for easy reference and study.
             </p>
           </div>
@@ -355,7 +378,7 @@ function Home() {
             </div>
             <h2>Video Playlists</h2>
             <p>
-              Watch organized video playlists on various topics. All videos are linked 
+              Watch organized video playlists on various topics. All videos are linked
               to YouTube for seamless viewing experience.
             </p>
           </div>
@@ -367,7 +390,7 @@ function Home() {
           </div>
           <h2>Transcriptions</h2>
           <p>
-            Read along with audio lectures using our detailed transcriptions. 
+            Read along with audio lectures using our detailed transcriptions.
             Perfect for study and reference.
           </p>
           <div className="feature-link-disabled">
@@ -379,8 +402,8 @@ function Home() {
       <div className="info-section">
         <h2>About This Library</h2>
         <p>
-          This platform provides access to spiritual knowledge through audio and video formats. 
-          Our collection includes lectures on Bhagavad Gita, Srimad Bhagavatam, conversations, 
+          This platform provides access to spiritual knowledge through audio and video formats.
+          Our collection includes lectures on Bhagavad Gita, Srimad Bhagavatam, conversations,
           and special festival lectures given by{' '}
           <span className="guru-name">HH Haladhara Svāmī Mahārāja</span>.
         </p>
