@@ -11,7 +11,7 @@ function VideoLibrary() {
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
   const categoryDropdownRef = React.useRef(null);
 
-  const categories = [
+  const categories = React.useMemo(() => [
     'Bhagvad Gita',
     'Chaitanya-Charitamrita',
     'Chaitanya Bhagavat',
@@ -20,7 +20,7 @@ function VideoLibrary() {
     'Festival Lecture',
     'Initiation Ceremony',
     'Seminar'
-  ];
+  ], []);
 
   const normalizeCategory = (value) =>
     String(value || '')
@@ -213,6 +213,7 @@ function VideoLibrary() {
                           key={c}
                           type="button"
                           role="option"
+                          aria-selected={false}
                           className="category-dropdown-item"
                           onClick={() => {
                             addCategory(c);

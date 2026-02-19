@@ -111,22 +111,22 @@ function Admin() {
     }
   };
 
-  const copyToClipboard = () => {
-    const json = generateJSON();
-    navigator.clipboard.writeText(json);
-    alert('JSON copied to clipboard! You can now add it to libraryData.js');
-  };
+  // const copyToClipboard = () => {
+  //   const json = generateJSON();
+  //   navigator.clipboard.writeText(json);
+  //   alert('JSON copied to clipboard! You can now add it to libraryData.js');
+  // };
 
   const submitPlaylist = () => {
     const currentPlaylist = activeTab === 'audio' ? audioPlaylist : videoPlaylist;
-    
+
     // Validation
     if (!currentPlaylist.playlistName) {
       alert('Please enter a playlist name');
       return;
     }
     if ((activeTab === 'audio' && audioPlaylist.audios.length === 0) ||
-        (activeTab === 'video' && videoPlaylist.videos.length === 0)) {
+      (activeTab === 'video' && videoPlaylist.videos.length === 0)) {
       alert('Please add at least one item to the playlist');
       return;
     }
@@ -144,7 +144,7 @@ function Admin() {
     URL.revokeObjectURL(url);
 
     alert(`✅ ${activeTab === 'audio' ? 'Audio' : 'Video'} playlist downloaded successfully!\n\nNext steps:\n1. Open the downloaded JSON file\n2. Copy the contents\n3. Add it to the ${activeTab}Data array in libraryData.js`);
-    
+
     // Reset form after successful submission
     resetForm();
   };
