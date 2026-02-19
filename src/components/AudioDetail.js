@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MusicNotes, ArrowLeft, PlayCircle, PauseCircle, Clock, CalendarBlank, FileText } from 'phosphor-react';
+import { ArrowLeft, PlayCircle, PauseCircle, Clock, CalendarBlank, FileText } from 'phosphor-react';
 import { audioData } from '../data/libraryData';
 import './AudioDetail.css';
 
