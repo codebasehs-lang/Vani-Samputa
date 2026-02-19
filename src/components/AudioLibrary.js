@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SlidersHorizontal } from 'phosphor-react';
+import { SlidersHorizontal, MagnifyingGlass, ArrowLeft, X, MusicNotes, MapPin } from 'phosphor-react';
 import { audioData } from '../data/libraryData';
 import './AudioLibrary.css';
 
@@ -41,17 +41,17 @@ function AudioLibrary() {
   };
 
   const languages = [
-    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card.jpg' },
-    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card.jpg' },
-    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/english-card.jpg' }
+    { name: 'Odia', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card-v3.png' },
+    { name: 'Hindi', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card-v3.png' },
+    { name: 'English', color: '#45b7d1', displayName: 'English', image: '/icons/english-card-v5.png' }
   ];
 
   const filteredPlaylists = selectedLanguage
     ? audioData.filter((playlist) =>
-        playlist.language === selectedLanguage &&
-        playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        playlistMatchesCategories(playlist, selectedCategories)
-      )
+      playlist.language === selectedLanguage &&
+      playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      playlistMatchesCategories(playlist, selectedCategories)
+    )
     : [];
 
   const addCategory = (category) => {
@@ -95,15 +95,15 @@ function AudioLibrary() {
 
   return (
     <div className="audio-library-container">
-      <div className={`library-header${selectedLanguage ? ' has-back' : ''}`}>
+      <div className={`compact-library-header${selectedLanguage ? ' has-back' : ''}`}>
         {selectedLanguage && (
-          <button onClick={() => setSelectedLanguage(null)} className="back-to-languages">
-            <span className="back-arrow">←</span>
-            <span className="back-text">Back to Languages</span>
+          <button onClick={() => setSelectedLanguage(null)} className="back-button-compact">
+            <ArrowLeft size={16} weight="bold" />
           </button>
         )}
-        <h1>{selectedLanguage ? `${selectedLanguage} Audio Lectures` : 'Audio Lectures'}</h1>
-        <p>{selectedLanguage ? `Browse ${selectedLanguage} spiritual lectures with transcriptions` : 'Listen to spiritual lectures organized by language with transcriptions'}</p>
+        <div className="header-text">
+          <h1>{selectedLanguage ? `${selectedLanguage} Audio Lectures` : 'Audio Lectures'}</h1>
+        </div>
       </div>
 
       {!selectedLanguage ? (
@@ -112,19 +112,20 @@ function AudioLibrary() {
             <div
               key={lang.name}
               className="language-card"
+              data-language={lang.name.toLowerCase()}
               onClick={() => {
                 setSelectedLanguage(lang.name);
                 setSearchTerm('');
                 setSelectedCategories([]);
                 setCategoryDropdownOpen(false);
               }}
-              style={{ 
-                borderTop: `4px solid ${lang.color}`,
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${lang.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
             >
+              <div
+                className="language-card-image"
+                style={{
+                  backgroundImage: `url(${lang.image})`,
+                }}
+              />
               <div className="playlist-count-badge">{getPlaylistCount(lang.name)}</div>
               <div className="language-card-content">
                 <h2>{lang.displayName}</h2>
@@ -136,7 +137,9 @@ function AudioLibrary() {
         <>
           <div className="search-container">
             <div className="search-bar">
-              <span className="search-icon">🔍</span>
+              <span className="search-icon">
+                <MagnifyingGlass size={18} />
+              </span>
               <input
                 type="text"
                 placeholder="Search playlists by name..."
@@ -150,7 +153,7 @@ function AudioLibrary() {
                   onClick={() => setSearchTerm('')}
                   aria-label="Clear search"
                 >
-                  ✕
+                  <X size={16} />
                 </button>
               )}
             </div>
@@ -206,7 +209,7 @@ function AudioLibrary() {
                         onClick={() => removeCategory(c)}
                         aria-label={`Remove ${c}`}
                       >
-                        ✕
+                        <X size={12} weight="bold" />
                       </button>
                     </span>
                   ))}
@@ -227,7 +230,7 @@ function AudioLibrary() {
                       {playlist.icon && playlist.icon.startsWith('/') ? (
                         <img src={playlist.icon} alt={playlist.playlistName} className="playlist-icon-img" />
                       ) : (
-                        <span className="playlist-icon-emoji">{playlist.icon || '🎵'}</span>
+                        <MusicNotes size={64} weight="light" className="playlist-icon-svg" />
                       )}
                     </div>
                     <div className="playlist-content">
@@ -235,7 +238,7 @@ function AudioLibrary() {
                       <p className="playlist-description">{playlist.description}</p>
                       {playlist.location && (
                         <p className="playlist-location">
-                          📍 {playlist.location}
+                          <MapPin size={16} weight="fill" /> {playlist.location}
                         </p>
                       )}
                     </div>

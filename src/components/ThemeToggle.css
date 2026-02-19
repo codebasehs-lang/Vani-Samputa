@@ -1,0 +1,72 @@
+.theme-toggle {
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* Circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    transition: all 0.2s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-surface);
+    color: var(--primary);
+    transform: rotate(15deg);
+    box-shadow: var(--shadow-sm);
+}
+
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-toggle-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.theme-notification {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    /* Aligns to the right edge of the wrapper/button */
+    background-color: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.notification-arrow {
+    position: absolute;
+    top: -6px;
+    right: 14px;
+    /* Aligns with the center of the button roughly */
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary);
+    transform: rotate(45deg);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
