@@ -11,7 +11,7 @@ function AudioLibrary() {
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
   const categoryDropdownRef = React.useRef(null);
 
-  const categories = [
+  const categories = React.useMemo(() => [
     'Bhagvad Gita',
     'Chaitanya-Charitamrita',
     'Chaitanya Bhagavat',
@@ -19,7 +19,7 @@ function AudioLibrary() {
     'Vaisnava Songs',
     'Festival Lecture',
     'Initiation Ceremony'
-  ];
+  ], []);
 
   const normalizeCategory = (value) =>
     String(value || '')
@@ -182,6 +182,7 @@ function AudioLibrary() {
                           key={c}
                           type="button"
                           role="option"
+                          aria-selected={false}
                           className="category-dropdown-item"
                           onClick={() => {
                             addCategory(c);
