@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, YoutubeLogo, CalendarBlank, Clock, PlayCircle } from 'phosphor-react';
+import { ArrowLeft, CalendarBlank, Clock, PlayCircle } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
 import './VideoPlaylist.css';
 
