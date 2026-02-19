@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, YoutubeLogo, CalendarBlank, Clock, PlayCircle } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
 import './VideoPlaylist.css';
 
@@ -7,13 +8,24 @@ function VideoPlaylist() {
   const { playlistId } = useParams();
   const playlist = videoData.find(p => p.id === parseInt(playlistId));
   const [currentVideo, setCurrentVideo] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const filteredVideos = playlist ? playlist.videos.filter(video =>
+    video.title.toLowerCase().includes(searchQuery.toLowerCase())
+  ) : [];
 
   if (!playlist) {
     return (
       <div className="video-playlist-container">
         <div className="error-message">
           <h2>Playlist not found</h2>
-          <Link to="/video" className="back-link">← Back to Video Library</Link>
+          <Link to="/video" className="back-link">
+            <ArrowLeft size={16} weight="bold" /> Back to Video Library
+          </Link>
         </div>
       </div>
     );
@@ -57,15 +69,14 @@ function VideoPlaylist() {
   };
 
   return (
-    <div className="video-playlist-container">
-      <Link to="/video" className="back-link">← Back to Video Library</Link>
-      
-      <div className="playlist-header">
-        <div className="playlist-icon">▶️</div>
-        <div>
+    <div className="video-playlist-container compact-mode">
+      <div className="compact-header">
+        <Link to="/video" className="back-link-compact">
+          <ArrowLeft size={18} weight="bold" />
+        </Link>
+        <div className="compact-title-wrapper">
           <h1>{playlist.playlistName}</h1>
-          <p>{playlist.description}</p>
-          <span className="video-count-badge">{playlist.videos.length} Videos</span>
+          <span className="compact-video-count">{playlist.videos.length} Videos</span>
         </div>
       </div>
 
@@ -74,49 +85,72 @@ function VideoPlaylist() {
         <div className="main-video-section">
           <div className="video-player-wrapper">
             <iframe
-              width="100%"
-              height="500"
+              className="main-video-iframe"
               src={getYouTubeEmbedUrl(playlist.videos[currentVideo].youtubeUrl)}
               title={playlist.videos[currentVideo].title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="main-video-iframe"
             ></iframe>
           </div>
           <div className="main-video-info">
             <h2>{playlist.videos[currentVideo].title}</h2>
             <div className="video-meta">
-              <span>⏱️ {playlist.videos[currentVideo].duration}</span>
+              <span><CalendarBlank size={16} /> {playlist.intro?.date || 'Date N/A'}</span>
+              <span><Clock size={16} /> {playlist.videos[currentVideo].duration || 'Duration N/A'}</span>
             </div>
-            <p className="video-description">{playlist.videos[currentVideo].description}</p>
+            {playlist.videos[currentVideo].description && (
+              <p className="video-description">
+                {playlist.videos[currentVideo].description}
+              </p>
+            )}
           </div>
         </div>
 
         {/* Playlist Sidebar */}
         <div className="playlist-sidebar">
           <div className="playlist-sidebar-header">
-            <h3>{playlist.playlistName}</h3>
+            <h3>Playlist Content</h3>
             <span>{currentVideo + 1} / {playlist.videos.length}</span>
           </div>
+          <div className="playlist-search">
+            <input
+              type="text"
+              placeholder="Search videos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
           <div className="playlist-items">
-            {playlist.videos.map((video, index) => (
-              <div
-                key={video.id}
-                className={`playlist-item ${index === currentVideo ? 'active' : ''}`}
-                onClick={() => handleVideoClick(index)}
-              >
-                <img 
-                  src={getYouTubeThumbnail(video.youtubeUrl)} 
-                  alt={video.title}
-                  className="playlist-item-thumbnail"
-                />
-                <div className="playlist-item-content">
-                  <h4>{video.title}</h4>
-                  <span className="playlist-item-duration">⏱️ {video.duration}</span>
+            {filteredVideos.map((video, index) => {
+              // Find original index to play correct video
+              const originalIndex = playlist.videos.findIndex(v => v.id === video.id);
+              return (
+                <div
+                  key={video.id}
+                  className={`playlist-item ${originalIndex === currentVideo ? 'active' : ''}`}
+                  onClick={() => handleVideoClick(originalIndex)}
+                >
+                  <div className="playlist-item-thumbnail-wrapper">
+                    <img
+                      src={getYouTubeThumbnail(video.youtubeUrl)}
+                      alt={video.title}
+                      className="playlist-item-thumbnail"
+                    />
+                    {originalIndex === currentVideo && (
+                      <div className="playing-overlay">
+                        <PlayCircle size={24} weight="fill" color="white" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="playlist-item-content">
+                    <h4>{video.title}</h4>
+                    <span className="playlist-item-duration">{video.duration}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

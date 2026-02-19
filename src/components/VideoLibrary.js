@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SlidersHorizontal } from 'phosphor-react';
+import { SlidersHorizontal, MagnifyingGlass } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
 import './VideoLibrary.css';
 
@@ -71,17 +71,18 @@ function VideoLibrary() {
   };
 
   const languages = [
-    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card.jpg' },
-    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card.jpg' },
-    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/english-card.jpg' }
+    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card-v3.png' },
+    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card-v3.png' },
+    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/english-card-v5.png' }
   ];
+
 
   const filteredPlaylists = selectedLanguage
     ? videoData.filter((playlist) =>
-        playlist.language === selectedLanguage &&
-        playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        playlistMatchesCategories(playlist, selectedCategories)
-      )
+      playlist.language === selectedLanguage &&
+      playlist.playlistName.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      playlistMatchesCategories(playlist, selectedCategories)
+    )
     : [];
 
   const addCategory = (category) => {
@@ -125,15 +126,15 @@ function VideoLibrary() {
 
   return (
     <div className="video-library-container">
-      <div className={`library-header${selectedLanguage ? ' has-back' : ''}`}>
+      <div className={`compact-library-header${selectedLanguage ? ' has-back' : ''}`}>
         {selectedLanguage && (
-          <button onClick={() => setSelectedLanguage(null)} className="back-to-languages">
+          <button onClick={() => setSelectedLanguage(null)} className="back-button-compact">
             <span className="back-arrow">←</span>
-            <span className="back-text">Back to Languages</span>
           </button>
         )}
-        <h1>{selectedLanguage ? `${selectedLanguage} Videos` : 'Video Playlists'}</h1>
-        <p>{selectedLanguage ? `Watch ${selectedLanguage} video lecture series` : 'Watch organized video lecture series on various topics'}</p>
+        <div className="header-text">
+          <h1>{selectedLanguage ? `${selectedLanguage} Videos` : 'Video Playlists'}</h1>
+        </div>
       </div>
 
       {!selectedLanguage ? (
@@ -142,19 +143,20 @@ function VideoLibrary() {
             <div
               key={lang.name}
               className="language-card"
+              data-language={lang.name.toLowerCase()}
               onClick={() => {
                 setSelectedLanguage(lang.name);
                 setSearchTerm('');
                 setSelectedCategories([]);
                 setCategoryDropdownOpen(false);
               }}
-              style={{ 
-                borderTop: `4px solid ${lang.color}`,
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${lang.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
             >
+              <div
+                className="language-card-image"
+                style={{
+                  backgroundImage: `url(${lang.image})`,
+                }}
+              />
               <div className="playlist-count-badge">{getPlaylistCount(lang.name)}</div>
               <div className="language-card-content">
                 <h2>{lang.displayName}</h2>
@@ -166,7 +168,9 @@ function VideoLibrary() {
         <>
           <div className="search-container">
             <div className="search-bar">
-              <span className="search-icon">🔍</span>
+              <span className="search-icon">
+                <MagnifyingGlass size={18} />
+              </span>
               <input
                 type="text"
                 placeholder="Search playlists by name..."
