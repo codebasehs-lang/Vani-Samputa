@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* --- Header Styles --- */
@@ -20,7 +21,7 @@
 .header-content {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 2.5rem;
   height: var(--header-height);
   display: flex;
   align-items: center;
@@ -87,10 +88,10 @@
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-.main-nav a {
+.main-nav a:not(.download-app-btn) {
   position: relative;
   font-size: 0.95rem;
   font-weight: 500;
@@ -98,16 +99,16 @@
   padding: 0.5rem 0;
 }
 
-.main-nav a:hover {
+.main-nav a:not(.download-app-btn):hover {
   color: var(--primary);
 }
 
-.main-nav a.active {
+.main-nav a:not(.download-app-btn).active {
   color: var(--primary-dark);
   font-weight: 600;
 }
 
-.main-nav a.active::after {
+.main-nav a:not(.download-app-btn).active::after {
   content: '';
   position: absolute;
   bottom: 0px;
@@ -136,6 +137,31 @@
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+/* Download App Button */
+.download-app-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-dark);
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.download-app-btn:hover {
+  color: var(--bg-surface);
+  background: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
 }
 
 .live-indicator-dot {
@@ -260,7 +286,7 @@
     transform: translateX(0);
   }
 
-  .main-nav a {
+  .main-nav a:not(.download-app-btn) {
     width: 100%;
     padding: 1rem 0;
     border-bottom: 1px solid var(--bg-subtle);
@@ -269,12 +295,21 @@
     color: var(--text-main);
   }
 
-  .main-nav a.active {
+  .main-nav a:not(.download-app-btn).active {
     color: var(--primary);
   }
 
-  .main-nav a.active::after {
+  .main-nav a:not(.download-app-btn).active::after {
     display: none;
+  }
+
+  .download-app-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    border-width: 1.5px;
   }
 
   /* Overlay */

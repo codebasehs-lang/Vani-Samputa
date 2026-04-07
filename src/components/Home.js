@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MusicNotes, PlayCircle, Notebook } from 'phosphor-react';
-import { audioData, videoData, cryingSchoolVideoData } from '../data/libraryData';
+import { audioData, videoData } from '../data/libraryData';
 import './Home.css';
 
 const DAILY_QUOTES = [
@@ -157,10 +157,9 @@ function Home() {
 
     const audioPlaylists = safeArray(audioData);
     const videoPlaylists = safeArray(videoData);
-    const cryingSchoolPlaylists = safeArray(cryingSchoolVideoData);
 
     const allAudios = audioPlaylists.flatMap((p) => safeArray(p?.audios));
-    const allVideos = [...videoPlaylists, ...cryingSchoolPlaylists].flatMap((p) => safeArray(p?.videos));
+    const allVideos = videoPlaylists.flatMap((p) => safeArray(p?.videos));
 
     const isRealTranscription = (audio) => {
       if (!audio?.hasTranscription) return false;
@@ -227,7 +226,7 @@ function Home() {
     };
   */
 
-  const withPlus = (value) => {
+  const formatCount = (value) => {
     const n = Number(value || 0);
     if (!Number.isFinite(n) || n <= 0) return '0';
     return `${n}+`;
@@ -413,15 +412,15 @@ function Home() {
         </p>
         <div className="stats-container">
           <div className="stat-item">
-            <div className="stat-number">{withPlus(audioLectureCount)}</div>
+            <div className="stat-number">{formatCount(audioLectureCount)}</div>
             <div className="stat-label">Audio Lectures</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">{withPlus(videoLectureCount)}</div>
+            <div className="stat-number">{formatCount(videoLectureCount)}</div>
             <div className="stat-label">Video Lectures</div>
           </div>
           <div className="stat-item">
-            <div className="stat-number">{withPlus(transcriptionCount)}</div>
+            <div className="stat-number">{formatCount(transcriptionCount)}</div>
             <div className="stat-label">Transcriptions</div>
           </div>
           {/*
