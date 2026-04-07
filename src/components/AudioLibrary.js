@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SlidersHorizontal, MagnifyingGlass, ArrowLeft, X, MusicNotes, MapPin } from 'phosphor-react';
+import { SlidersHorizontal, MagnifyingGlass, ArrowLeft, X, MapPin, ArrowSquareOut } from 'phosphor-react';
 import { audioData } from '../data/libraryData';
 import './AudioLibrary.css';
 
@@ -220,29 +220,25 @@ function AudioLibrary() {
           </div>
 
           {filteredPlaylists.length > 0 ? (
-            <div className="playlists-grid">
+            <div className="playlists-list">
               {filteredPlaylists.map(playlist => (
-                <Link key={playlist.id} to={`/audio/${playlist.id}`} className="playlist-card-link">
-                  <div className="playlist-card">
-                    <div className="playlist-thumbnail">
-                      <div className="thumbnail-overlay">
-                        <span className="audio-count">{playlist.audios.length} Lectures</span>
-                      </div>
-                      {playlist.icon && playlist.icon.startsWith('/') ? (
-                        <img src={playlist.icon} alt={playlist.playlistName} className="playlist-icon-img" />
-                      ) : (
-                        <MusicNotes size={64} weight="light" className="playlist-icon-svg" />
-                      )}
-                    </div>
-                    <div className="playlist-content">
-                      <h3>{playlist.playlistName}</h3>
-                      <p className="playlist-description">{playlist.description}</p>
+                <Link key={playlist.id} to={`/audio/${playlist.id}`} className="playlist-row">
+                  <div className="playlist-row-info">
+                    <h3>{playlist.playlistName}</h3>
+                    <p className="playlist-row-meta">
+                      {playlist.description}
                       {playlist.location && (
-                        <p className="playlist-location">
-                          <MapPin size={16} weight="fill" /> {playlist.location}
-                        </p>
+                        <span className="playlist-row-location">
+                          <MapPin size={14} weight="fill" /> {playlist.location}
+                        </span>
                       )}
-                    </div>
+                      <span className="playlist-row-count">{playlist.audios.length} Lectures</span>
+                    </p>
+                  </div>
+                  <div className="playlist-row-actions">
+                    <span className="playlist-row-open" title="Open playlist">
+                      <ArrowSquareOut size={20} weight="bold" />
+                    </span>
                   </div>
                 </Link>
               ))}
