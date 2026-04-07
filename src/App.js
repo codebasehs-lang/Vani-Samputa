@@ -113,7 +113,7 @@ function App() {
                   About
                 </NavLink>
                 <a
-                  href="/download/APK.apk"
+                  href="/download/VaniSamputa.apk"
                   download
                   className="download-app-btn"
                   onClick={closeMobileMenu}
