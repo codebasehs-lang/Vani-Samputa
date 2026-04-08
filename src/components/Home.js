@@ -2,43 +2,44 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MusicNotes, PlayCircle, Notebook } from 'phosphor-react';
 import { audioData, videoData } from '../data/libraryData';
+import dailyQuotes from '../data/dailyQuotes.json';
 import './Home.css';
 
-const DAILY_QUOTES = [
-  {
-    language: 'English',
-    title: 'Daily Quote',
-    text: 'With loving devotion, one can serve the Guru and Krishna (seva). When this deep love and affection is present, bhajan is performed; otherwise, whatever else one does is simply activity (karma).',
-  },
-  {
-    language: 'हिंदी',
-    title: 'आज का उद्धरण',
-    text: 'ममता से गुरु- कृष्ण की सेवा होती हैं; ममता से भजन होता है, नहीं तो वह कर्म हो जाता है।',
-  },
-  {
-    language: 'ଓଡ଼ିଆ',
-    title: 'ଆଜିର ଉଦ୍ଧୃତି',
-    text: 'ମମତାରେ ଗୁରୁ, କୃଷ୍ଣଙ୍କର ସେବା ହୁଏ, ମମତା ଭାବ ଥିଲେ ଭଜନ ହୁଏ ଅନ୍ୟଥା ଯାହା କିଛି କରିବା ସେସବୁ କର୍ମ।',
-  },
-  {
-    language: 'বাংলা',
-    title: 'আজকের উক্তি',
-    text: 'ভক্তি ও প্রেম দিয়ে গুরু ও কৃষ্ণের সেবা করা যায়। যখন এই গভীর প্রেম ও স্নেহ থাকে, তখন ভজন হয়; অন্যথায় যা কিছু করা হয় তা শুধু কর্ম।',
-  },
-];
+  function getFormattedDate() {
+    const today = new Date();
+    return today.toLocaleDateString(undefined, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
 
 function Home() {
   const navigate = useNavigate();
 
   const [quoteLanguage, setQuoteLanguage] = React.useState('English');
+
+  // Get today's date key in MM-DD format
+  const getTodayKey = () => {
+    const today = new Date();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${month}-${day}`;
+  };
+
+  const todayKey = getTodayKey();
+
+  // Get the quote for today and selected language, fallback to default
+  const selectedQuote = React.useMemo(() => {
+    const quoteSet = dailyQuotes[todayKey] || dailyQuotes['default'];
+    return quoteSet[quoteLanguage] || dailyQuotes['default'][quoteLanguage];
+  }, [quoteLanguage, todayKey]);
   // const [visitorStats, setVisitorStats] = React.useState({ count: 0, lastVisit: null });
   const [searchQuery, setSearchQuery] = React.useState('');
   const [searchOpen, setSearchOpen] = React.useState(false);
   const searchWrapperRef = React.useRef(null);
 
-  const selectedQuote = React.useMemo(() => {
-    return DAILY_QUOTES.find((quote) => quote.language === quoteLanguage) || DAILY_QUOTES[0];
-  }, [quoteLanguage]);
+
 
   const normalizeText = React.useCallback((value) => {
     return String(value || '')
@@ -319,7 +320,9 @@ function Home() {
 
             <div className="daily-quote-content">
               <div className="daily-quote-header">
-                <div className="daily-quote-label">Daily Quote</div>
+                <div className="daily-quote-label">
+                  Daily Quote <span className="daily-quote-date" style={{ marginLeft: '1em' }}>{getFormattedDate()}</span>
+                </div>
                 <div className="quote-language-tabs" role="tablist" aria-label="Quote language">
                   {['English', 'हिंदी', 'ଓଡ଼ିଆ', 'বাংলা'].map((lang) => (
                     <button
@@ -342,7 +345,6 @@ function Home() {
                   aria-label={`${selectedQuote.title} (${selectedQuote.language})`}
                 >
                   <div className="daily-quote-meta">
-                    <span className="daily-quote-title">{selectedQuote.title}</span>
                     <span className="daily-quote-language">{selectedQuote.language}</span>
                   </div>
                   <div className={`daily-quote-text ${selectedQuote.language === 'हिंदी' ? 'font-hindi' :
