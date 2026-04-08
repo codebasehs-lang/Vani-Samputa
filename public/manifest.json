@@ -1,0 +1,21 @@
+{
+  "short_name": "VaniSamputa",
+  "name": "Vāṇī Saṃpuṭa",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff8f1",
+  "theme_color": "#7a4c1e",
+  "orientation": "portrait"
+}

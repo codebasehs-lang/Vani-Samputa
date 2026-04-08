@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, HashRouter, Routes, Route, Link, NavLink } from 'react-router-dom';
 import { Capacitor } from '@capacitor/core';
-import { DownloadSimple } from 'phosphor-react';
+import AppInstallButton from './components/AppInstallButton';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
@@ -112,15 +112,7 @@ function App() {
                 >
                   About
                 </NavLink>
-                <a
-                  href="/download/VaniSamputa.apk"
-                  download
-                  className="download-app-btn"
-                  onClick={closeMobileMenu}
-                >
-                  <DownloadSimple size={16} weight="bold" />
-                  <span>App</span>
-                </a>
+                <AppInstallButton />
               </nav>
 
               <div
