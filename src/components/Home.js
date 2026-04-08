@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MusicNotes, PlayCircle, Notebook } from 'phosphor-react';
 import { audioData, videoData } from '../data/libraryData';
+import englishAudioData from '../data/englishAudioData.generated.json';
 import dailyQuotes from '../data/dailyQuotes.json';
 import './Home.css';
 
@@ -156,10 +157,27 @@ function Home() {
   const { audioLectureCount, videoLectureCount, transcriptionCount } = React.useMemo(() => {
     const safeArray = (value) => (Array.isArray(value) ? value : []);
 
+    // Hindi & Odia: count all audios in all playlists (including subPlaylists if present)
     const audioPlaylists = safeArray(audioData);
-    const videoPlaylists = safeArray(videoData);
+    let allAudios = [];
+    for (const playlist of audioPlaylists) {
+      if (playlist.subPlaylists && Array.isArray(playlist.subPlaylists)) {
+        for (const sub of playlist.subPlaylists) {
+          allAudios = allAudios.concat(safeArray(sub.audios));
+        }
+      } else {
+        allAudios = allAudios.concat(safeArray(playlist.audios));
+      }
+    }
 
-    const allAudios = audioPlaylists.flatMap((p) => safeArray(p?.audios));
+    // English: count all audios in all subPlaylists
+    for (const playlist of safeArray(englishAudioData)) {
+      for (const sub of safeArray(playlist.subPlaylists)) {
+        allAudios = allAudios.concat(safeArray(sub.audios));
+      }
+    }
+
+    const videoPlaylists = safeArray(videoData);
     const allVideos = videoPlaylists.flatMap((p) => safeArray(p?.videos));
 
     const isRealTranscription = (audio) => {
