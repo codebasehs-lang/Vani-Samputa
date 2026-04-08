@@ -43,12 +43,12 @@
 }
 
 .logo-circle {
-  width: 48px;
-  height: 48px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   overflow: hidden;
   background: var(--bg-surface);
-  box-shadow: 0 0 0 2px var(--accent);
+  /* Removed border (box-shadow) */
 }
 
 .site-logo {
