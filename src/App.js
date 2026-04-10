@@ -5,6 +5,7 @@ import AppInstallButton from './components/AppInstallButton';
 import './App.css';
 import { ThemeProvider } from './context/ThemeContext';
 import ThemeToggle from './components/ThemeToggle';
+
 import Home from './components/Home';
 import AudioLibrary from './components/AudioLibrary';
 import VideoLibrary from './components/VideoLibrary';
@@ -15,6 +16,8 @@ import Live from './components/Live';
 import CryingSchoolLibrary from './components/CryingSchoolLibrary';
 import CryingSchoolPlaylist from './components/CryingSchoolPlaylist';
 import About from './components/About';
+import Articles from './components/Articles';
+import ArticleDetail from './components/ArticleDetail';
 import liveConfig from './config/liveConfig.json';
 
 import ScrollToTop from './components/ScrollToTop';
@@ -94,6 +97,13 @@ function App() {
                 >
                   Video Lectures
                 </NavLink>
+                <NavLink
+                  to="/articles"
+                  onClick={closeMobileMenu}
+                  className={({ isActive }) => (isActive ? 'active' : undefined)}
+                >
+                  Articles
+                </NavLink>
                 {/* <Link to="/crying-school" onClick={closeMobileMenu}>Crying School Videos</Link> */}
                 <NavLink
                   to="/live"
@@ -135,6 +145,8 @@ function App() {
               <Route path="/crying-school/:playlistId" element={<CryingSchoolPlaylist />} />
               <Route path="/live" element={<Live />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:id" element={<ArticleDetail />} />
             </Routes>
           </main>
 

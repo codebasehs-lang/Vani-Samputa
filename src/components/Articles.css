@@ -1,0 +1,283 @@
+/* Redesigned Article Card Image and Layout */
+.article-image-wrapper-redesign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 0 1.2rem 0;
+  background: #f7f5f2;
+  border-radius: 18px 18px 0 0;
+  min-height: 210px;
+}
+
+.article-image-redesign {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+  background: #f7f5f2;
+  object-fit: cover;
+}
+
+.article-card-app {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fdfcf9;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  transition: box-shadow 0.2s;
+}
+.article-card-app:hover {
+  box-shadow: 0 6px 32px rgba(0,0,0,0.13);
+}
+.article-content-app {
+  padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.article-title-app {
+  margin-top: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+.article-summary-app {
+  margin-bottom: 1.2rem;
+  color: #3d2a13;
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+/* Article Detail Responsive Header Layout */
+.article-detail-header-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.article-detail-image-col {
+  flex: 0 0 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.article-detail-image {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  background: #f7f5f2;
+}
+
+.article-detail-title-col {
+  flex: 1 1 320px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.article-detail-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #7c4a02;
+  margin: 0;
+  line-height: 1.2;
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .article-detail-header-flex {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  .article-detail-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .article-detail-image-col {
+    justify-content: center;
+  }
+}
+.article-detail-card-app {
+  background: var(--bg-surface, #fff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(180, 136, 47, 0.08));
+  max-width: 700px;
+  margin: 2em auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.article-detail-content-app {
+  color: var(--text-main, #4d3c1c);
+  font-size: 1.15em;
+  line-height: 1.7;
+  margin-top: 1.2em;
+  white-space: pre-line;
+}
+/* ISKCON-inspired color palette and layout */
+
+/* Match main app background and card style */
+.articles-main-app-bg {
+  background: var(--bg-main, #f7f7f7);
+  min-height: 100vh;
+  max-width: 1200px;
+  margin: 2.5em auto;
+  padding: 0 1.5em;
+}
+
+.articles-title-app {
+  text-align: center;
+  color: var(--primary-dark, #6d5b2c);
+  font-size: 2.3em;
+  margin-bottom: 1.5em;
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-weight: 700;
+}
+
+.articles-grid-app {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2em;
+}
+
+.article-card-app {
+  background: var(--bg-surface, #fff);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md, 0 4px 16px rgba(180, 136, 47, 0.08));
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.article-card-app:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-lg, 0 8px 32px rgba(180, 136, 47, 0.16));
+}
+
+.article-image-wrapper-app {
+  width: 100%;
+  height: 180px;
+  background: var(--bg-subtle, #f3f3ed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.article-image-app {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0 0 12px 12px;
+}
+
+.article-content-app {
+  padding: 1.2em 1.5em 1.5em 1.5em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.article-title-app {
+  font-size: 1.3em;
+  color: var(--primary, #a67c52);
+  margin-bottom: 0.5em;
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+.article-summary-app {
+  color: var(--text-main, #6d5b2c);
+  font-size: 1em;
+  margin-bottom: 1.2em;
+}
+.read-more-btn-app {
+  align-self: flex-start;
+  background: var(--primary, #a67c52);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.read-more-btn-app:hover {
+  background: var(--primary-dark, #6d5b2c);
+  color: #fff;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2em;
+}
+
+.article-card {
+  background: #fffbe6;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(180, 136, 47, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.article-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(180, 136, 47, 0.16);
+}
+
+.article-image-wrapper {
+  width: 100%;
+  height: 180px;
+  background: #f5e6b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.article-image {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 0 0 12px 12px;
+}
+
+.article-content {
+  padding: 1.2em 1.5em 1.5em 1.5em;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.article-title {
+  font-size: 1.3em;
+  color: #b4882f;
+  margin-bottom: 0.5em;
+  font-family: 'Georgia', serif;
+}
+.article-summary {
+  color: #6d5b2c;
+  font-size: 1em;
+  margin-bottom: 1.2em;
+}
+.read-more-btn {
+  align-self: flex-start;
+  background: #b4882f;
+  color: #fffbe6;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.read-more-btn:hover {
+  background: #7a5a13;
+  color: #fff;
+}
