@@ -1,5 +1,23 @@
 {
-  "14-04-2026": {
+  "04-14": {
+    "English": {
+      "title": "Daily Quote",
+      "text": "With loving devotion, one can serve the Guru and Krishna (seva). When this deep love and affection is present, bhajan is performed; otherwise, whatever else one does is simply activity (karma)."
+    },
+    "हिंदी": {
+      "title": "आज का उद्धरण",
+      "text": "ममता से गुरु- कृष्ण की सेवा होती हैं; ममता से भजन होता है, नहीं तो वह कर्म हो जाता है।"
+    },
+    "ଓଡ଼ିଆ": {
+      "title": "ଆଜିର ଉଦ୍ଧୃତି",
+      "text": "ମମତାରେ ଗୁରୁ, କୃଷ୍ଣଙ୍କର ସେବା ହୁଏ, ମମତା ଭାବ ଥିଲେ ଭଜନ ହୁଏ ଅନ୍ୟଥା ଯାହା କିଛି କରିବା ସେସବୁ କର୍ମ।"
+    },
+    "বাংলা": {
+      "title": "আজকের উক্তি",
+      "text": "ভক্তি ও প্রেম দিয়ে গুরু ও কৃষ্ণের সেবা করা যায়। যখন এই গভীর প্রেম ও স্নেহ থাকে, তখন ভজন হয়; অন্যথায় যা কিছু করা হয় তা শুধু কর্ম।"
+    }
+  },
+  "14-04": {
     "English": {
       "title": "Daily Quote",
       "text": "With loving devotion, one can serve the Guru and Krishna (seva). When this deep love and affection is present, bhajan is performed; otherwise, whatever else one does is simply activity (karma)."
