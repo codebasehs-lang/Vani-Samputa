@@ -94,8 +94,10 @@ function VideoLibrary() {
     setSelectedCategories((prev) => prev.filter((c) => c !== category));
   };
 
-  const getPlaylistCount = (language) => {
-    return videoData.filter(p => p.language === language).length;
+  const getLectureCount = (language) => {
+    return videoData
+      .filter((p) => p.language === language)
+      .reduce((sum, playlist) => sum + (Array.isArray(playlist.videos) ? playlist.videos.length : 0), 0);
   };
 
   const availableCategories = React.useMemo(() => {
@@ -157,7 +159,7 @@ function VideoLibrary() {
                   backgroundImage: `url(${lang.image})`,
                 }}
               />
-              <div className="playlist-count-badge">{getPlaylistCount(lang.name)}</div>
+              <div className="playlist-count-badge">{getLectureCount(lang.name)}</div>
               <div className="language-card-content">
                 <h2>{lang.displayName}</h2>
               </div>
