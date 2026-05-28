@@ -71,9 +71,9 @@ function VideoLibrary() {
   };
 
   const languages = [
-    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card-v3.png' },
-    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card-v3.png' },
-    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/english-card-v5.png' }
+    { name: 'Odia', icon: '🕉️', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/Odia.jpeg' },
+    { name: 'Hindi', icon: '🙏', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/Hindi.jpeg' },
+    { name: 'English', icon: '📖', color: '#45b7d1', displayName: 'English', image: '/icons/English.jpeg' }
   ];
 
 

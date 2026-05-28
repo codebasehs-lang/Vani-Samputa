@@ -256,7 +256,7 @@ function Home() {
       <div className="hero-section">
         <div className="hero-content">
           <div className="guru-photo">
-            <img src="/icons/hindi-card.jpg" alt="HH Haladhara Svāmī Mahārāja" />
+            <img src="/icons/hompage_image-1.jpg" alt="HH Haladhara Svāmī Mahārāja" />
           </div>
           <div className="hero-text">
             <h1>Welcome to Vāṇī Saṃpuṭa</h1>

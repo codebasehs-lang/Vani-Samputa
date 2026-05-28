@@ -83,9 +83,9 @@ function AudioLibrary() {
   }
 
   const languages = [
-    { name: 'Odia', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/odia-card-v3.png' },
-    { name: 'Hindi', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/hindi-card-v3.png', count: hindiAudioCount },
-    { name: 'English', color: '#45b7d1', displayName: 'English', image: '/icons/english-card-v5.png', count: englishAudioCount }
+    { name: 'Odia', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/Odia.jpeg' },
+    { name: 'Hindi', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/Hindi.jpeg', count: hindiAudioCount },
+    { name: 'English', color: '#45b7d1', displayName: 'English', image: '/icons/English.jpeg', count: englishAudioCount }
   ];
 
   const filteredPlaylists = selectedLanguage
