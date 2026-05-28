@@ -22,7 +22,7 @@ export default function About() {
       <div className="about-grid">
         <AboutCard
           heading="Haladhara Svāmī Mahārāja"
-          photoSrc="/icons/hindi-card.jpg"
+          photoSrc="/icons/hompage_image-1.jpg"
           alt="Haladhara Svāmī Mahārāja"
         >
           <p>
