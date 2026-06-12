@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, CalendarBlank, Clock, PlayCircle } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
 import ResumableYouTubePlayer from './ResumableYouTubePlayer';
+import { recordRecentlyPlayed } from '../utils/recentlyPlayed';
 import './VideoPlaylist.css';
 
 function VideoPlaylist() {
   const { playlistId } = useParams();
+  const [searchParams] = useSearchParams();
   const playlist = videoData.find(p => p.id === parseInt(playlistId));
-  const [currentVideo, setCurrentVideo] = useState(0);
+  const initialVideoIndex = React.useMemo(() => {
+    if (!playlist) return 0;
+    const videoId = searchParams.get('video');
+    if (!videoId) return 0;
+    const idx = playlist.videos.findIndex(v => String(v.id) === String(videoId));
+    return idx >= 0 ? idx : 0;
+  }, [playlist, searchParams]);
+  const [currentVideo, setCurrentVideo] = useState(initialVideoIndex);
   const [searchQuery, setSearchQuery] = useState('');
+
+  React.useEffect(() => {
+    setCurrentVideo(initialVideoIndex);
+  }, [initialVideoIndex]);
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,6 +31,34 @@ function VideoPlaylist() {
   const filteredVideos = playlist ? playlist.videos.filter(video =>
     video.title.toLowerCase().includes(searchQuery.toLowerCase())
   ) : [];
+
+  React.useEffect(() => {
+    if (!playlist) return;
+    const video = playlist.videos[currentVideo];
+    if (!video) return;
+    const videoId = (() => {
+      const raw = video.youtubeUrl;
+      if (!raw) return null;
+      try {
+        const url = new URL(raw);
+        if (url.hostname === 'youtu.be') return url.pathname.replace('/', '') || null;
+        if (url.searchParams.has('v')) return url.searchParams.get('v');
+        const pathMatch = url.pathname.match(/\/(embed|shorts)\/([^/?]+)/);
+        if (pathMatch?.[2]) return pathMatch[2];
+      } catch { /* ignore */ }
+      const fallback = String(raw).match(/(?:v=|\/)([0-9A-Za-z_-]{11})(?:[?&/]|$)/);
+      return fallback?.[1] || null;
+    })();
+    recordRecentlyPlayed({
+      type: 'video',
+      playlistId: playlist.id,
+      itemId: video.id,
+      title: video.title,
+      playlistName: playlist.playlistName,
+      thumbnail: videoId ? `https://img.youtube.com/vi/${videoId}/mqdefault.jpg` : '',
+      to: `/video/${playlist.id}?video=${video.id}`
+    });
+  }, [playlist, currentVideo]);
 
   if (!playlist) {
     return (

@@ -1,13 +1,26 @@
 import React, { useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, PlayCircle, PauseCircle, Clock, CalendarBlank, FileText, ArrowCounterClockwise, ArrowClockwise } from 'phosphor-react';
 import { audioData } from '../data/libraryData';
+import { recordRecentlyPlayed } from '../utils/recentlyPlayed';
 import './AudioDetail.css';
 
 function AudioDetail() {
   const { id } = useParams();
+  const [searchParams] = useSearchParams();
   const playlist = audioData.find(p => p.id === parseInt(id));
-  const [currentAudio, setCurrentAudio] = useState(0);
+  const initialAudioIndex = React.useMemo(() => {
+    if (!playlist) return 0;
+    const audioId = searchParams.get('audio');
+    if (!audioId) return 0;
+    const idx = playlist.audios.findIndex(a => String(a.id) === String(audioId));
+    return idx >= 0 ? idx : 0;
+  }, [playlist, searchParams]);
+  const [currentAudio, setCurrentAudio] = useState(initialAudioIndex);
+
+  React.useEffect(() => {
+    setCurrentAudio(initialAudioIndex);
+  }, [initialAudioIndex]);
   const [searchQuery, setSearchQuery] = useState('');
   const [seekTime, setSeekTime] = useState('');
   const [currentTime, setCurrentTime] = useState(0);
@@ -96,6 +109,21 @@ function AudioDetail() {
     if (!key) return;
     try { localStorage.removeItem(key); } catch (err) { /* ignore */ }
   };
+
+  React.useEffect(() => {
+    if (!playlist) return;
+    const audio = playlist.audios[currentAudio];
+    if (!audio) return;
+    recordRecentlyPlayed({
+      type: 'audio',
+      playlistId: playlist.id,
+      itemId: audio.id,
+      title: audio.title,
+      playlistName: playlist.playlistName,
+      thumbnail: playlist.icon || '',
+      to: `/audio/${playlist.id}?audio=${audio.id}`
+    });
+  }, [playlist, currentAudio]);
 
   if (!playlist) {
     return (

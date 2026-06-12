@@ -4,6 +4,7 @@ import { MusicNotes, PlayCircle, Notebook } from 'phosphor-react';
 import { audioData, videoData } from '../data/libraryData';
 import englishAudioData from '../data/englishAudioData.generated.json';
 import dailyQuotes from '../data/dailyQuotes.json';
+import { getRecentlyPlayed } from '../utils/recentlyPlayed';
 import './Home.css';
 
   function getFormattedDate() {
@@ -39,6 +40,12 @@ function Home() {
   const [searchQuery, setSearchQuery] = React.useState('');
   const [searchOpen, setSearchOpen] = React.useState(false);
   const searchWrapperRef = React.useRef(null);
+
+  const [recentlyPlayed, setRecentlyPlayed] = React.useState([]);
+
+  React.useEffect(() => {
+    setRecentlyPlayed(getRecentlyPlayed());
+  }, []);
 
 
 
@@ -379,6 +386,46 @@ function Home() {
           </div>
         </div>
       </div>
+
+      {recentlyPlayed.length > 0 && (
+        <div className="recently-played-section" aria-label="Recently played">
+          <div className="recently-played-header">
+            <h2>Recently Played</h2>
+          </div>
+          <div className="recently-played-grid">
+            {recentlyPlayed.map((item) => (
+              <Link
+                key={`${item.type}-${item.playlistId}-${item.itemId}`}
+                to={item.to}
+                className="recently-played-card"
+              >
+                <div className="recently-played-thumb">
+                  {item.thumbnail ? (
+                    <img src={item.thumbnail} alt="" loading="lazy" />
+                  ) : (
+                    <div className="recently-played-thumb-fallback" aria-hidden="true">
+                      {item.type === 'video' ? (
+                        <PlayCircle size={34} weight="duotone" />
+                      ) : (
+                        <MusicNotes size={34} weight="duotone" />
+                      )}
+                    </div>
+                  )}
+                  <span className={`recently-played-badge ${item.type}`}>
+                    {item.type === 'video' ? 'Video' : 'Audio'}
+                  </span>
+                </div>
+                <div className="recently-played-info">
+                  <h3 className="recently-played-title">{item.title}</h3>
+                  {item.playlistName ? (
+                    <p className="recently-played-playlist">{item.playlistName}</p>
+                  ) : null}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="features-grid">
         <Link to="/audio" className="feature-card-link">
