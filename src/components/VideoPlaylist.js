@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, CalendarBlank, Clock, PlayCircle } from 'phosphor-react';
 import { videoData } from '../data/libraryData';
+import ResumableYouTubePlayer from './ResumableYouTubePlayer';
 import './VideoPlaylist.css';
 
 function VideoPlaylist() {
@@ -54,11 +55,6 @@ function VideoPlaylist() {
     return fallback?.[1] || null;
   };
 
-  const getYouTubeEmbedUrl = (rawUrl) => {
-    const videoId = getYouTubeVideoId(rawUrl) || 'dQw4w9WgXcQ';
-    return `https://www.youtube.com/embed/${videoId}`;
-  };
-
   const getYouTubeThumbnail = (rawUrl) => {
     const videoId = getYouTubeVideoId(rawUrl) || 'dQw4w9WgXcQ';
     return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
@@ -84,14 +80,11 @@ function VideoPlaylist() {
         {/* Main Video Player */}
         <div className="main-video-section">
           <div className="video-player-wrapper">
-            <iframe
-              className="main-video-iframe"
-              src={getYouTubeEmbedUrl(playlist.videos[currentVideo].youtubeUrl)}
+            <ResumableYouTubePlayer
+              videoId={getYouTubeVideoId(playlist.videos[currentVideo].youtubeUrl) || 'dQw4w9WgXcQ'}
               title={playlist.videos[currentVideo].title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
+              className="main-video-iframe"
+            />
           </div>
           <div className="main-video-info">
             <h2>{playlist.videos[currentVideo].title}</h2>
