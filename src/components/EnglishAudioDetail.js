@@ -6,6 +6,8 @@ function EnglishAudioDetail({ subPlaylist, onBack }) {
   const [currentAudio, setCurrentAudio] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [seekTime, setSeekTime] = useState('');
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
   const filteredAudios = subPlaylist.audios.filter(audio =>
@@ -29,6 +31,16 @@ function EnglishAudioDetail({ subPlaylist, onBack }) {
     return null;
   };
 
+  const formatTime = (secs) => {
+    if (!secs || isNaN(secs)) return '0:00';
+    const total = Math.floor(secs);
+    const h = Math.floor(total / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    const mm = h > 0 ? String(m).padStart(2, '0') : String(m);
+    return `${h > 0 ? h + ':' : ''}${mm}:${String(s).padStart(2, '0')}`;
+  };
+
   const handleSeekToTime = (e) => {
     e.preventDefault();
     const player = audioRef.current;
@@ -50,8 +62,10 @@ function EnglishAudioDetail({ subPlaylist, onBack }) {
 
   const handleLoadedMetadata = () => {
     const player = audioRef.current;
+    if (!player) return;
+    setDuration(player.duration || 0);
     const key = getStorageKey();
-    if (!player || !key) return;
+    if (!key) return;
     try {
       const saved = parseFloat(localStorage.getItem(key));
       if (!isNaN(saved) && saved > 1 && saved < player.duration - 1) {
@@ -62,8 +76,10 @@ function EnglishAudioDetail({ subPlaylist, onBack }) {
 
   const handleTimeUpdate = () => {
     const player = audioRef.current;
+    if (!player) return;
+    setCurrentTime(player.currentTime || 0);
     const key = getStorageKey();
-    if (!player || !key) return;
+    if (!key) return;
     if (Math.abs(player.currentTime - lastSavedRef.current) < 5) return;
     lastSavedRef.current = player.currentTime;
     try {
@@ -113,6 +129,9 @@ function EnglishAudioDetail({ subPlaylist, onBack }) {
               <span>10s</span>
               <ArrowClockwise size={20} weight="bold" />
             </button>
+            <div className="audio-time-display">
+              {formatTime(currentTime)} / {formatTime(duration)}
+            </div>
           </div>
 
           <div className="audio-controls">
