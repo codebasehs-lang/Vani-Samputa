@@ -1,18 +1,52 @@
 import React, { useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, PlayCircle, PauseCircle, Clock, CalendarBlank, FileText, ArrowCounterClockwise, ArrowClockwise } from 'phosphor-react';
+import { recordRecentlyPlayed } from '../utils/recentlyPlayed';
 import './AudioDetail.css';
 
-function SeminarAudioDetail({ subPlaylist, onBack }) {
-  const [currentAudio, setCurrentAudio] = useState(0);
+function SeminarAudioDetail({ subPlaylist, onBack, initialAudioId }) {
+  const [, setSearchParams] = useSearchParams();
+  const initialIndex = React.useMemo(() => {
+    if (initialAudioId == null || !subPlaylist) return 0;
+    const idx = subPlaylist.audios.findIndex(a => String(a.id) === String(initialAudioId));
+    return idx >= 0 ? idx : 0;
+  }, [subPlaylist, initialAudioId]);
+  const [currentAudio, setCurrentAudio] = useState(initialIndex);
   const [searchQuery, setSearchQuery] = useState('');
   const [seekTime, setSeekTime] = useState('');
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
+  React.useEffect(() => {
+    setCurrentAudio(initialIndex);
+  }, [initialIndex]);
+
   const filteredAudios = subPlaylist ? subPlaylist.audios.filter(audio =>
     audio.title.toLowerCase().includes(searchQuery.toLowerCase())
   ) : [];
+
+  React.useEffect(() => {
+    if (!subPlaylist) return;
+    const audio = subPlaylist.audios[currentAudio];
+    if (!audio) return;
+    // Reflect the selected lecture in the URL (e.g. /audio?lang=seminar&sp=...&aid=263)
+    setSearchParams(
+      { lang: 'seminar', sp: subPlaylist.subPlaylistName, aid: String(audio.id) },
+      { replace: true }
+    );
+    recordRecentlyPlayed({
+      type: 'audio',
+      playlistId: 'seminar',
+      itemId: audio.id,
+      title: audio.title,
+      playlistName: subPlaylist.subPlaylistName,
+      thumbnail: '',
+      to: `/audio?lang=seminar&sp=${encodeURIComponent(subPlaylist.subPlaylistName)}&aid=${audio.id}`
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subPlaylist, currentAudio]);
+
 
   const skip = (seconds) => {
     const player = audioRef.current;
