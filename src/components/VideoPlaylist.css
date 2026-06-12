@@ -90,6 +90,23 @@
   border: none;
 }
 
+.resumable-youtube-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.resumable-youtube-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
 .main-video-info {
   padding: 1.5rem;
 }

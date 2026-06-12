@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { cryingSchoolVideoData } from '../data/libraryData';
+import ResumableYouTubePlayer from './ResumableYouTubePlayer';
 import './VideoPlaylist.css';
 
 function CryingSchoolPlaylist() {
@@ -44,12 +45,6 @@ function CryingSchoolPlaylist() {
     return fallback?.[1] || null;
   };
 
-  const getYouTubeEmbedUrl = (rawUrl) => {
-    const videoId = getYouTubeVideoId(rawUrl);
-    if (!videoId) return null;
-    return `https://www.youtube.com/embed/${videoId}`;
-  };
-
   const getYouTubeThumbnail = (rawUrl) => {
     const videoId = getYouTubeVideoId(rawUrl);
     if (!videoId) return null;
@@ -62,7 +57,7 @@ function CryingSchoolPlaylist() {
 
   const videos = Array.isArray(playlist.videos) ? playlist.videos : [];
   const activeVideo = videos[currentVideo];
-  const activeEmbedUrl = activeVideo ? getYouTubeEmbedUrl(activeVideo.youtubeUrl) : null;
+  const activeVideoId = activeVideo ? getYouTubeVideoId(activeVideo.youtubeUrl) : null;
 
   return (
     <div className="video-playlist-container">
@@ -88,17 +83,12 @@ function CryingSchoolPlaylist() {
         <div className="youtube-layout">
           <div className="main-video-section">
             <div className="video-player-wrapper">
-              {activeEmbedUrl ? (
-                <iframe
-                  width="100%"
-                  height="500"
-                  src={activeEmbedUrl}
+              {activeVideoId ? (
+                <ResumableYouTubePlayer
+                  videoId={activeVideoId}
                   title={activeVideo.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
                   className="main-video-iframe"
-                ></iframe>
+                />
               ) : (
                 <div className="error-message">
                   <h2>Invalid video URL</h2>

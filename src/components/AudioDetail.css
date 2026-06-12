@@ -89,6 +89,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   position: relative;
 }
 
@@ -107,6 +108,89 @@
   position: relative;
   z-index: 10;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--bg-subtle);
+}
+
+.seek-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--primary);
+  background: transparent;
+  color: var(--primary);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.seek-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Skip buttons flanking the player on the colored wrapper */
+.seek-btn-side {
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.seek-btn-side:hover {
+  background: #fff;
+  color: var(--primary);
+}
+
+.seek-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.seek-input {
+  width: 110px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--bg-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background: var(--bg-card, #fff);
+}
+
+.seek-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.seek-go-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.seek-go-btn:hover {
+  background: var(--primary-dark);
 }
 
 .main-audio-info {
@@ -375,7 +459,38 @@
   }
 
   .audio-player-wrapper {
-    padding: 2rem 1rem;
+    padding: 2rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .audio-controls {
+    padding: 0.85rem 1rem;
+    gap: 0.5rem;
+  }
+
+  .seek-btn {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .seek-btn-side {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .seek-btn-side span {
+    display: none;
+  }
+
+  .seek-form {
+    flex: 1 1 100%;
+    justify-content: center;
+    margin-top: 0.25rem;
+  }
+
+  .seek-input {
+    width: 100%;
+    max-width: 140px;
   }
 
   .main-audio-info {
