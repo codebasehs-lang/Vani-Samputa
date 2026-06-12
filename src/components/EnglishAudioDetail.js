@@ -1,18 +1,49 @@
 import React, { useState, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, PlayCircle, PauseCircle, Clock, CalendarBlank, FileText, ArrowCounterClockwise, ArrowClockwise } from 'phosphor-react';
+import { recordRecentlyPlayed } from '../utils/recentlyPlayed';
 import './AudioDetail.css';
 
-function EnglishAudioDetail({ subPlaylist, onBack }) {
-  const [currentAudio, setCurrentAudio] = useState(0);
+function EnglishAudioDetail({ subPlaylist, onBack, initialAudioSno }) {
+  const [, setSearchParams] = useSearchParams();
+  const initialIndex = React.useMemo(() => {
+    if (initialAudioSno == null) return 0;
+    const idx = subPlaylist.audios.findIndex(a => String(a['Sno.']) === String(initialAudioSno));
+    return idx >= 0 ? idx : 0;
+  }, [subPlaylist, initialAudioSno]);
+  const [currentAudio, setCurrentAudio] = useState(initialIndex);
   const [searchQuery, setSearchQuery] = useState('');
   const [seekTime, setSeekTime] = useState('');
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(null);
 
+  React.useEffect(() => {
+    setCurrentAudio(initialIndex);
+  }, [initialIndex]);
+
   const filteredAudios = subPlaylist.audios.filter(audio =>
     audio.Title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  React.useEffect(() => {
+    const audio = filteredAudios[currentAudio];
+    if (!audio) return;
+    // Reflect the selected lecture in the URL (e.g. /audio?lang=english&sno=2)
+    setSearchParams({ lang: 'english', sno: String(audio['Sno.']) }, { replace: true });
+    recordRecentlyPlayed({
+      type: 'audio',
+      playlistId: 'english',
+      itemId: audio['Sno.'],
+      title: audio.Title,
+      playlistName: subPlaylist.subPlaylistName,
+      thumbnail: '',
+      to: `/audio?lang=english&sno=${audio['Sno.']}`
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentAudio, subPlaylist]);
+
+
 
   const skip = (seconds) => {
     const player = audioRef.current;

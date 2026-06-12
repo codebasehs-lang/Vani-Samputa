@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { SlidersHorizontal, MagnifyingGlass, ArrowLeft, X, MapPin, ArrowSquareOut } from 'phosphor-react';
 import { audioData } from '../data/libraryData';
+import seminarData from '../data/seminarData';
 import SeminarSubPlaylists from './SeminarSubPlaylists';
 import SeminarAudioDetail from './SeminarAudioDetail';
 import EnglishAudioLibrary from './EnglishAudioLibrary';
 import './AudioLibrary.css';
 
 function AudioLibrary() {
+  const [searchParams] = useSearchParams();
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -16,6 +18,26 @@ function AudioLibrary() {
   const [showSeminarSubPlaylists, setShowSeminarSubPlaylists] = useState(false);
   const [selectedSeminarSubPlaylist, setSelectedSeminarSubPlaylist] = useState(null);
   const [showEnglishAudio, setShowEnglishAudio] = useState(false);
+
+  // Deep-link support so the home page "Recently Played" can resume audio.
+  const deepLinkLang = searchParams.get('lang');
+  const deepLinkSno = searchParams.get('sno');
+  const deepLinkAid = searchParams.get('aid');
+
+  React.useEffect(() => {
+    if (deepLinkLang === 'english') {
+      setShowEnglishAudio(true);
+    } else if (deepLinkLang === 'seminar') {
+      setShowSeminarSubPlaylists(true);
+      const sp = searchParams.get('sp');
+      if (sp) {
+        const match = seminarData.find(s => s.subPlaylistName === sp);
+        if (match) setSelectedSeminarSubPlaylist(match);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deepLinkLang]);
+
 
   const categories = React.useMemo(() => [
     'Bhagvad Gita',
@@ -200,12 +222,13 @@ function AudioLibrary() {
           ))}
         </div>
       ) : showEnglishAudio ? (
-        <EnglishAudioLibrary />
+        <EnglishAudioLibrary initialSno={deepLinkSno} />
       ) : showSeminarSubPlaylists ? (
         selectedSeminarSubPlaylist ? (
           <SeminarAudioDetail
             subPlaylist={selectedSeminarSubPlaylist}
             onBack={() => setSelectedSeminarSubPlaylist(null)}
+            initialAudioId={deepLinkAid}
           />
         ) : (
           <SeminarSubPlaylists

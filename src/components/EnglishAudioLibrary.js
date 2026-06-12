@@ -69,9 +69,23 @@ function EnglishSubPlaylists({ playlist, onSelectSubPlaylist, onBack }) {
 
 
 
-export default function EnglishAudioLibrary() {
+export default function EnglishAudioLibrary({ initialSno } = {}) {
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [selectedSubPlaylist, setSelectedSubPlaylist] = useState(null);
+
+  // Deep-link: open the playlist/sub-playlist containing the requested audio.
+  React.useEffect(() => {
+    if (initialSno == null) return;
+    for (const playlist of englishAudioData) {
+      for (const sub of playlist.subPlaylists || []) {
+        if ((sub.audios || []).some(a => String(a['Sno.']) === String(initialSno))) {
+          setSelectedPlaylist(playlist);
+          setSelectedSubPlaylist(sub);
+          return;
+        }
+      }
+    }
+  }, [initialSno]);
 
   if (!selectedPlaylist) {
     return <EnglishPlaylists onSelectPlaylist={setSelectedPlaylist} />;
@@ -79,5 +93,5 @@ export default function EnglishAudioLibrary() {
   if (!selectedSubPlaylist) {
     return <EnglishSubPlaylists playlist={selectedPlaylist} onSelectSubPlaylist={setSelectedSubPlaylist} onBack={() => setSelectedPlaylist(null)} />;
   }
-  return <EnglishAudioDetail subPlaylist={selectedSubPlaylist} onBack={() => setSelectedSubPlaylist(null)} />;
+  return <EnglishAudioDetail subPlaylist={selectedSubPlaylist} onBack={() => setSelectedSubPlaylist(null)} initialAudioSno={initialSno} />;
 }
