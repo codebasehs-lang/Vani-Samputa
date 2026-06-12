@@ -110,6 +110,12 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Hide the native time text inside the player; we show our own below */
+.main-audio-player::-webkit-media-controls-current-time-display,
+.main-audio-player::-webkit-media-controls-time-remaining-display {
+  display: none;
+}
+
 .audio-controls {
   display: flex;
   align-items: center;
@@ -154,6 +160,19 @@
 .seek-btn-side:hover {
   background: #fff;
   color: var(--primary);
+}
+
+.audio-time-display {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
 }
 
 .seek-form {
@@ -459,8 +478,13 @@
   }
 
   .audio-player-wrapper {
-    padding: 2rem 0.75rem;
+    padding: 1.75rem 0.75rem 2.75rem;
     gap: 0.5rem;
+  }
+
+  .audio-time-display {
+    bottom: 0.75rem;
+    font-size: 0.85rem;
   }
 
   .audio-controls {
