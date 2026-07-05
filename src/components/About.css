@@ -1,105 +1,135 @@
+/* ── About Page ── */
 .about-page {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 1.5rem 1rem 3rem;
+  padding: 2rem 1.25rem 4rem;
 }
 
-.about-hero {
-  background: var(--bg-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  padding: 1.75rem 1.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
+/* ── Section ── */
+.about-section {
+  padding: 2.5rem 0;
 }
 
-.about-hero h1 {
-  margin: 0 0 0.75rem;
-  font-size: 2.2rem;
-  color: var(--text-main);
+.about-section-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
 }
 
-.about-hero p {
-  margin: 0;
-  color: var(--text-muted);
-  line-height: 1.8;
+/* reverse: image left, text right */
+.about-section--reverse .about-section-inner {
+  flex-direction: row-reverse;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 1.5rem;
-}
-
-.about-card {
+/* centered: text only, no image */
+.about-section--centered {
   background: var(--bg-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  padding: 2rem 2.25rem;
 }
 
-.about-card-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.25rem 1.25rem 1rem;
-  background: var(--bg-subtle);
-  border-bottom: 1px solid var(--border-color);
+.about-section--centered .about-section-title {
+  margin-bottom: 1.1rem;
 }
 
-.about-avatar {
-  width: 74px;
-  height: 74px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid var(--bg-surface);
-  box-shadow: var(--shadow-sm);
-  flex-shrink: 0;
-}
-
-.about-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.about-card-title {
-  margin: 0;
-  font-size: 1.15rem;
-  color: var(--primary);
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.about-card-body {
-  padding: 1rem 1.25rem 1.25rem;
+.about-section--centered p {
   color: var(--text-muted);
-  line-height: 1.85;
-}
-
-.about-card-body p {
+  line-height: 1.9;
   margin: 0 0 0.9rem;
 }
 
-.about-card-body p:last-child {
+.about-section--centered p:last-child {
   margin-bottom: 0;
 }
 
-.about-placeholder {
-  font-style: italic;
-  color: var(--text-light);
+/* ── Section title ── */
+.about-section-title {
+  margin: 0 0 1rem;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.25;
 }
 
-@media (max-width: 480px) {
-  .about-hero h1 {
-    font-size: 1.9rem;
+/* ── Text block ── */
+.about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-text p {
+  color: var(--text-muted);
+  line-height: 1.9;
+  margin: 0 0 0.9rem;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Image ── */
+.about-image-wrap {
+  flex: 0 0 280px;
+  width: 280px;
+}
+
+.about-photo {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: block;
+}
+
+/* ── Divider ── */
+.about-divider {
+  height: 1px;
+  background: var(--border-color);
+  margin: 0;
+  opacity: 0.6;
+}
+
+/* ── External link button ── */
+.about-external-link {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.25rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.about-external-link:hover {
+  opacity: 0.85;
+}
+
+/* ── Responsive ── */
+@media (max-width: 680px) {
+  .about-section-inner,
+  .about-section--reverse .about-section-inner {
+    flex-direction: column;
   }
 
-  .about-card-header {
-    padding: 1.1rem 1rem 0.9rem;
+  .about-image-wrap {
+    flex: none;
+    width: 100%;
   }
 
-  .about-card-body {
-    padding: 0.9rem 1rem 1rem;
+  .about-photo {
+    height: 240px;
+  }
+
+  .about-section--centered {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .about-section-title {
+    font-size: 1.25rem;
   }
 }

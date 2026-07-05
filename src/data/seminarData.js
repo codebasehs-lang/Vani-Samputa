@@ -2,6 +2,93 @@
 
 const seminarData = [
   {
+    "subPlaylistName": "Sriman Mahaprabhu & Prema Bhakti",
+    "audios": [
+      {
+        "id": 101,
+        "title": "Sriman Mahaprabhu & Prema Bhakti Day 1",
+        "audioUrl": "https://audio.iskcondesiretree.com/02_-_ISKCON_Swamis/ISKCON_Swamis_-_D_to_P/His_Holiness_Haladhar_Swami/Oriya_Lectures/Bhagavad_Gita/Chapter-03/Haladhar_Sw_BG_03-01_Oriya_-_Introduction_to_Chapter-03_-_2022-02-15.mp3",
+        "duration": "1:51:50",
+        "date": "2024-01-02",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": true,
+        "transcription": "coming soon..."
+      },
+      {
+        "id": 102,
+        "title": "Sriman Mahaprabhu & Prema Bhakti Day 2",
+        "audioUrl": "https://res.cloudinary.com/dds3bav6u/video/upload/v1767424183/Sriman_Mahaprabhu___Prema_Bhakti_Day_2_slnazk.mp3",
+        "duration": "1:50:39",
+        "date": "2024-01-15",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": true,
+        "transcription": "coming soon..."
+      },
+      {
+        "id": 103,
+        "title": "Sriman Mahaprabhu & Prema Bhakti Day 3",
+        "audioUrl": "https://res.cloudinary.com/dds3bav6u/video/upload/v1767424166/Sriman_Mahaprabhu__amp__Prema_Bhakti_Day_3_qqpcws.mp3",
+        "duration": "1:49:16",
+        "date": "2024-01-15",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": true,
+        "transcription": "coming soon..."
+      },
+      {
+        "id": 104,
+        "title": "Sriman Mahaprabhu & Prema Bhakti Day 4",
+        "audioUrl": "https://res.cloudinary.com/dds3bav6u/video/upload/v1767420883/Sriman_Mahaprabhu___Prema_Bhakti_Day_4_gb5ii7.mp3",
+        "duration": "2:02:08",
+        "date": "2024-01-15",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": true,
+        "transcription": "coming soon..."
+      }
+    ]
+  },
+  {
+    "subPlaylistName": "Srila Raghunatha Das Goswami Charita",
+    "audios": [
+      {
+        "id": 482,
+        "title": "Srila Raghunatha Das Goswami Charita Day 1",
+        "audioUrl": "https://audio.iskcondesiretree.com/02_-_ISKCON_Swamis/ISKCON_Swamis_-_D_to_P/His_Holiness_Haladhar_Swami/Hindi_Lectures/Seminars/Raghunath_Das_Goswami_Charita/Haladhar_Sw_Seminars_Hindi_-_Raghunath_Das_Goswami_Charita_Day-01_-_2024-10-23_ISKCON_Vrindavan.mp3",
+        "duration": "1:40:06",
+        "date": "2024-10-23",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": false,
+        "transcription": ""
+      },
+      {
+        "id": 483,
+        "title": "Srila Raghunatha Das Goswami Charita Day 2",
+        "audioUrl": "https://audio.iskcondesiretree.com/02_-_ISKCON_Swamis/ISKCON_Swamis_-_D_to_P/His_Holiness_Haladhar_Swami/Hindi_Lectures/Seminars/Raghunath_Das_Goswami_Charita/Haladhar_Sw_Seminars_Hindi_-_Raghunath_Das_Goswami_Charita_Day-02_-_2024-10-24_ISKCON_Vrindavan.mp3",
+        "duration": "1:51:10",
+        "date": "2024-10-24",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": false,
+        "transcription": ""
+      },
+      {
+        "id": 484,
+        "title": "Srila Raghunatha Das Goswami Charita Day 3",
+        "audioUrl": "https://audio.iskcondesiretree.com/02_-_ISKCON_Swamis/ISKCON_Swamis_-_D_to_P/His_Holiness_Haladhar_Swami/Hindi_Lectures/Seminars/Raghunath_Das_Goswami_Charita/Haladhar_Sw_Seminars_Hindi_-_Raghunath_Das_Goswami_Charita_Day-03_-_2024-10-25_ISKCON_Vrindavan.mp3",
+        "duration": "2:01:51",
+        "date": "2024-10-25",
+        "location": "ISKCON Vrindavan",
+        "language": "Hindi",
+        "hasTranscription": false,
+        "transcription": ""
+      }
+    ]
+  },
+  {
     "subPlaylistName": "How to take Krishna Consciousness Whole Heartedly",
     "audios": [
       {

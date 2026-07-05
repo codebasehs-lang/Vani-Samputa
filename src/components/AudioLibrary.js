@@ -106,7 +106,7 @@ function AudioLibrary() {
 
   const languages = [
     { name: 'Odia', color: '#ff6b6b', displayName: 'ଓଡ଼ିଆ', image: '/icons/Odia.jpeg' },
-    { name: 'Hindi', color: '#4ecdc4', displayName: 'हिंदी', image: '/icons/Hindi.jpeg', count: hindiAudioCount },
+    { name: 'Hindi', color: '#4ecdc4', displayName: 'हिंदी', image: '/images/Gurudeva2.png', count: hindiAudioCount },
     { name: 'English', color: '#45b7d1', displayName: 'English', image: '/icons/English.jpeg', count: englishAudioCount }
   ];
 
@@ -174,7 +174,7 @@ function AudioLibrary() {
         </div>
       </div>
 
-      {!selectedLanguage && !showEnglishAudio ? (
+      {!selectedLanguage && !showEnglishAudio && !showSeminarSubPlaylists ? (
         <div className="language-categories">
           {languages.map(lang => (
             lang.name === 'English' ? (
