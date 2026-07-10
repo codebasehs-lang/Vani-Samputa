@@ -450,6 +450,46 @@
   box-shadow: var(--shadow-sm);
 }
 
+/* --- Dark Mode Adjustments --- */
+[data-theme='dark'] .main-audio-section,
+[data-theme='dark'] .playlist-sidebar {
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .audio-player-wrapper {
+  background: linear-gradient(135deg, #3A2E22 0%, #201913 100%);
+}
+
+[data-theme='dark'] .audio-player-wrapper::before {
+  opacity: 0.6;
+}
+
+[data-theme='dark'] .main-audio-player {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='dark'] .seek-input {
+  background: var(--bg-subtle);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+[data-theme='dark'] .seek-input::placeholder {
+  color: var(--text-light);
+}
+
+[data-theme='dark'] .back-link-compact,
+[data-theme='dark'] .back-link {
+  background: var(--bg-subtle);
+  border-color: var(--border-color);
+  color: var(--text-muted);
+}
+
+[data-theme='dark'] .playlist-sidebar-header span {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--accent-light);
+}
+
 /* Response Design */
 @media (max-width: 900px) {
   .audio-layout {

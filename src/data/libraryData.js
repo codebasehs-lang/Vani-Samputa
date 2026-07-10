@@ -5,7 +5,7 @@ import { cryingSchoolVideoDataHindi } from './cryingSchoolVideoData.hindi.manual
 export const audioData = [
     {
           id: 3,
-          playlistName: "Srimad Bhagavatam Hindi Lectures",
+          playlistName: "Srimad Bhagavatam",
           category: ["Srimad Bhagavatam"],
           description: "Srimad Bhagavatam Hindi audio lectures",
           language: "Hindi",

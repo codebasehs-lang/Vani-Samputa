@@ -210,7 +210,7 @@
   color: var(--primary-dark, #6d5b2c);
   font-size: 2.3em;
   margin-bottom: 1.5em;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
   font-weight: 700;
 }
 
@@ -259,7 +259,7 @@
   font-size: 1.3em;
   color: var(--primary, #a67c52);
   margin-bottom: 0.5em;
-  font-family: 'Playfair Display', 'Georgia', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
 }
 .article-summary-app {
   color: var(--text-main, #6d5b2c);
@@ -328,7 +328,7 @@
   font-size: 1.3em;
   color: #b4882f;
   margin-bottom: 0.5em;
-  font-family: 'Georgia', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
 }
 .article-summary {
   color: #6d5b2c;

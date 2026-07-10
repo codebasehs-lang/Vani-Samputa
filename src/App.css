@@ -74,8 +74,7 @@
   font-size: 0.85rem;
   color: var(--text-muted);
   font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.02em;
   margin-top: 2px;
 }
 
@@ -291,7 +290,7 @@
     padding: 1rem 0;
     border-bottom: 1px solid var(--bg-subtle);
     font-size: 1.1rem;
-    font-family: 'Playfair Display', serif;
+    font-family: 'Gentium Book Plus', 'Georgia', serif;
     color: var(--text-main);
   }
 

@@ -68,7 +68,7 @@
 
 .guru-name {
   display: inline-block;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
   font-weight: 700;
   font-style: italic;
   color: var(--primary);
@@ -318,7 +318,7 @@
 }
 
 .daily-quote-text {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
   font-size: 1.5rem;
   line-height: 1.6;
   color: var(--text-main);
@@ -449,7 +449,7 @@
 }
 
 .stat-number {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
   font-size: 3rem;
   font-weight: 700;
   color: var(--primary);
@@ -530,7 +530,7 @@
 }
 
 .recently-played-header h2 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Gentium Book Plus', 'Georgia', serif;
   font-size: 1.75rem;
   color: var(--text-main);
   margin: 0;

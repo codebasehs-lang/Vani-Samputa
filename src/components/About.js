@@ -78,7 +78,7 @@ export default function About() {
           In 2019, during His Holiness Haladhara Swami&rsquo;s European tour in France, at ISKCON New
           Mayapura, he expressed his cherished desire to create a platform where all audio lectures of
           his spiritual master would be available for everyone. He aimed to explain the mission of his
-          spiritual master, emphasizing that everything is present in Srila Prabhupada&rsquo;s books
+          spiritual master Śrī Śrīmad Gaura Govinda Svāmī Mahārāja, emphasizing that everything is present in Srila Prabhupada&rsquo;s books
           and that there is no need to seek teachings outside of ISKCON.
         </p>
         <p>
